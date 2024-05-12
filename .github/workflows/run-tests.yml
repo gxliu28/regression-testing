@@ -1,0 +1,24 @@
+name: Run Regression Testing
+
+on:
+  schedule:
+    - cron: '0 1 * * 6'  # JST 10:00 AM every Saturday
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # 利用するNode.jsのバージョンを指定
+      
+    - name: Install dependencies
+      run: npm install  # もし依存関係があれば適切に変更してください
+      
+    - name: Run tests
+      run: npx mocha testBatchProcess.js  # もしテストスクリプトがあれば適切に変更してください
